@@ -8,6 +8,7 @@ Todo List com:
 
 Instruções de Uso:
 - pip install pyro4
+- pip install cryptography
 
 - Executar `pyro4-ns` para criar um servidor de nomes
 
