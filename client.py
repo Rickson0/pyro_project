@@ -3,6 +3,7 @@ import utils
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 import base64
+import os
 
 def main():
     ns = Pyro4.locateNS()
@@ -24,23 +25,28 @@ def main():
                 backend=default_backend()
             )
 
+            print("\n> COMANDOS < ")
             print("\n1. Add Task\n2. Remove Task\n3. List Tasks\n4. Exit")
             choice = input("Enter choice: ")
 
             if choice == '1':
-                task = input("Enter task to add: ")
+                os.system('cls' if os.name == 'nt' else 'clear')
+                task = input("\n> Enter task to add: ")
                 encrypted_task = utils.encrypt_message(server_public_key, task.encode())
                 encoded_task = base64.b64encode(encrypted_task).decode()
                 print(server.add_task(encoded_task, public_key.public_bytes(
                     encoding=serialization.Encoding.PEM,
                     format=serialization.PublicFormat.SubjectPublicKeyInfo).decode()))
+
             elif choice == '2':
-                task = input("Enter task to remove: ")
+                os.system('cls' if os.name == 'nt' else 'clear')
+                task = input("\n> Enter task to remove: ")
                 encrypted_task = utils.encrypt_message(server_public_key, task.encode())
                 encoded_task = base64.b64encode(encrypted_task).decode()
                 print(server.remove_task(encoded_task, public_key.public_bytes(
                     encoding=serialization.Encoding.PEM,
                     format=serialization.PublicFormat.SubjectPublicKeyInfo).decode()))
+
             elif choice == '3':
                 encrypted_tasks = server.list_tasks(public_key.public_bytes(
                     encoding=serialization.Encoding.PEM,
@@ -50,10 +56,13 @@ def main():
                     decoded_task = base64.b64decode(encrypted_task)
                     decrypted_task = utils.decrypt_message(private_key, decoded_task)
                     decrypted_tasks.append(decrypted_task.decode())
-                print("Tasks:")
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("> Tasks:")
                 for task in decrypted_tasks:
                     print(task)
+                
             elif choice == '4':
+                os.system('cls' if os.name == 'nt' else 'clear')
                 break
             else:
                 print("Invalid choice. Try again.")
