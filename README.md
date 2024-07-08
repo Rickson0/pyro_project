@@ -12,8 +12,7 @@ Instruções de Uso:
 
 - Executar `pyro4-ns` para criar um servidor de nomes
 
-- Executar `python server1.py` para iniciar o servidor 1
-- Executar `python server2.py` para iniciar o servidor 2
+- Executar `python server.py <numero_do_servidor>` para iniciar o servidor 1
 
 - Rodar `python load_balancer.py` para iniciar o Load Balancer
 
