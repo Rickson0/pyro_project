@@ -67,7 +67,7 @@ def main():
             else:
                 print("Invalid choice. Try again.")
         except Exception as e:
-            print(f"Server error: {e}. Trying next server...")
+            pass
 
 if __name__ == "__main__":
     main()
